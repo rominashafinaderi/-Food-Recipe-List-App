@@ -1,20 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class Myapp extends StatefulWidget {
-  const Myapp({super.key});
+import 'package:flutter/material.dart';
+import 'package:visualstudio_test/job/job.dart';
+
+class AdzunaApp extends StatefulWidget {
+  const AdzunaApp({super.key});
 
   @override
-  State<Myapp> createState() => _MyappState();
+  State<AdzunaApp> createState() => _AdzunaAppState();
 }
 
-class _MyappState extends State<Myapp> {
-  Future<Album> fetchAlbum() async {
+class _AdzunaAppState extends State<AdzunaApp> {
+  Future<Job> fetchAlbum() async {
     final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
     if (response.statusCode == 200) {
-      return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      return Job.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
       throw Exception('Failed to load album');
     }
@@ -32,12 +34,12 @@ class _MyappState extends State<Myapp> {
     futureAlbum = fetchAlbum();
   }
 
-  late Future<Album> futureAlbum;
+  late Future<Job> futureAlbum;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(actions: [Icon(Icons.arrow_back)]),
-        body: FutureBuilder<Album>(
+        body: FutureBuilder<Job>(
           future: futureAlbum,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -48,9 +50,8 @@ class _MyappState extends State<Myapp> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        color: Colors.red, child: Text(snapshot.data!.title)),
-                    Text('$snapshot.data!.userId'),
-                    Text('$snapshot.data!.user'),
+                        color: Colors.red, child: Text('$snapshot.data!.count')),
+                  
                   ],
                 ),
               );
@@ -60,24 +61,5 @@ class _MyappState extends State<Myapp> {
             return CircularProgressIndicator();
           },
         ));
-  }
-}
-
-//Album class
-class Album {
-  final int id;
-  final int userId;
-  final String title;
-  Album({required this.userId, required this.id, required this.title});
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'userId': int userId,
-        'id': int id,
-        'title': String title,
-      } =>
-        Album(id: id, userId: userId, title: title),
-      _ => throw const FormatException('failed'),
-    };
   }
 }
