@@ -31,13 +31,22 @@ class RecipeApi {
       "useQueryString": "true"
     });
 
-    Map data = jsonDecode(response.body);
-    List _temp = [];
+    if (response.statusCode == 200) {
+      Map data = jsonDecode(response.body);
+      List _temp = [];
 
-    for (var i in data['feed']) {
-      _temp.add(i['content']['details']);
+      if (data['feed'] != null) {
+        for (var i in data['feed']) {
+          _temp.add(i['content']['details']);
+        }
+      } else {
+        print('Feed data is null or not iterable');
+      }
+
+      return Recipe.recipesFromSnapshot(_temp);
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+      return []; // Return an empty list or handle the error accordingly
     }
-
-    return Recipe.recipesFromSnapshot(_temp);
   }
 }
