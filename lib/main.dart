@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:visualstudio_test/test/Adzuna.dart';
-import 'package:visualstudio_test/views/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.white,
           useMaterial3: true,
-          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.white))),
-      home: AdzunaApp(),
+          textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white))),
+      home: const AdzunaApp(),
     );
   }
 }

@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        title: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(Icons.restaurant_menu),
           SizedBox(
             width: 10,
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
           Text('food recipe')
         ]),
       ),
-      body: RecipeCard(
+      body: const RecipeCard(
           cookTime: 'eeda', rating: 'da', thumbnailUrl: '', title: 'aeeeeee'),
     );
   }

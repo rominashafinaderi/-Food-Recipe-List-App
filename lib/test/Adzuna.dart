@@ -38,7 +38,7 @@ class _AdzunaAppState extends State<AdzunaApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(actions: [Icon(Icons.arrow_back)]),
+        appBar: AppBar(actions: const [Icon(Icons.arrow_back)]),
         body: FutureBuilder<Job>(
           future: futureAlbum,
           builder: (context, snapshot) {
@@ -56,9 +56,9 @@ class _AdzunaAppState extends State<AdzunaApp> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text('ddddddddddddddd');
+              return const Text('ddddddddddddddd');
             }
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
         ));
   }
