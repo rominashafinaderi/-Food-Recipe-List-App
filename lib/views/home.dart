@@ -19,19 +19,19 @@ class _HomePageState    extends State<HomePage> {
     getRecipes();
   }
 
-  Future <void> getRecipes() async{
-    _recipe = await RecipeApi.getRecipe();
-    setState(() {
-      isLoading = true;
-    });
-  }
-  // Future<void> getRecipes() async{
+  // Future <void> getRecipes() async{
   //   _recipe = await RecipeApi.getRecipe();
   //   setState(() {
-  //     isLoading = false;
+  //     isLoading = true;
   //   });
-  //   print(_recipe);
   // }
+  Future<void> getRecipes() async{
+    _recipe = await RecipeApi.getRecipe();
+    setState(() {
+      isLoading = false;
+    });
+    print(_recipe);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
