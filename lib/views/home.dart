@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState    extends State<HomePage> {
  late  List<Recipe> _recipe;
   bool isLoading = true;
   @override
@@ -19,13 +19,19 @@ class _HomePageState extends State<HomePage> {
     getRecipes();
   }
 
-  Future<void> getRecipes() async{
+  Future <void> getRecipes() async{
     _recipe = await RecipeApi.getRecipe();
     setState(() {
-      isLoading = false;
+      isLoading = true;
     });
-    print(_recipe);
   }
+  // Future<void> getRecipes() async{
+  //   _recipe = await RecipeApi.getRecipe();
+  //   setState(() {
+  //     isLoading = false;
+  //   });
+  //   print(_recipe);
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         ]),
       ),
       body:isLoading?
-       Center(child: CircularProgressIndicator(),):
+        const Center(child: CircularProgressIndicator(),):
         ListView.builder(
           itemCount: _recipe.length,
           itemBuilder: (context,index){
